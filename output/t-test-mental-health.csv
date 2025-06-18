@@ -1,0 +1,5 @@
+item,mean_diff_total,t_total,p_t_total,mean_diff_fire,t_fire,p_t_fire,mean_diff_police,t_police,p_t_police
+differences,-0.59,6.73,0.0000,-0.63,6.14,0.0000,-0.57,3.94,0.0002
+selfcare,-0.68,7.42,0.0000,-0.63,4.90,0.0000,-0.76,5.62,0.0000
+resources,-0.69,8.46,0.0000,-0.71,6.66,0.0000,-0.69,5.32,0.0000
+support,-0.36,3.22,0.0009,-0.17,1.10,0.1398,-0.50,3.18,0.0014

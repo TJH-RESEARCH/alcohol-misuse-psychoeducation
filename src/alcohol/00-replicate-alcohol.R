@@ -28,4 +28,4 @@ source(here::here('src/alcohol/agree-alcohol.R'))
 # Write Data Set --------------------------------------------------------------
 ## Using the Qualtrics API, as we do more trainings and collect more data, the analysis will change
 ## So here let's save a copy of the data that was used in order to enable replication in the future
-data_alcohol %>% write_csv(here::here(paste0('output/data-alcohol-',Sys.Date(), '.csv')))
+data_alcohol %>% write_csv(here::here(paste0('data-alcohol-',Sys.Date(), '.csv')))

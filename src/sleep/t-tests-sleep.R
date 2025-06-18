@@ -2,6 +2,8 @@
 t_tests_sleep <-
   bind_rows(
     # How knowledgeable are you on how sleep affects the body?
+    
+    ## total sample
     data_sleep %>%
       filter(match_before_after == 1) %>% 
       select(id, after, know_effects) %>% 
@@ -15,6 +17,7 @@ t_tests_sleep <-
       custom_t_test() %>% 
       mutate(item = 'effects', service = 'total'),
     
+    ## police only
     data_sleep %>%
       filter(match_before_after == 1 & police == 1) %>% 
       select(id, after, know_effects) %>% 
@@ -28,6 +31,7 @@ t_tests_sleep <-
       custom_t_test() %>% 
       mutate(item = 'effects', service = 'police'),
     
+    ## Fire only
     data_sleep %>%
       filter(match_before_after == 1 & fire == 1) %>% 
       select(id, after, know_effects) %>% 
@@ -43,6 +47,8 @@ t_tests_sleep <-
     
     
     # How knowledgeable would you rate yourself on sleep hygiene?
+    
+    ## total 
     data_sleep %>%
       filter(match_before_after == 1) %>% 
       select(id, after, know_hygiene) %>% 
