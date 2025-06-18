@@ -7,10 +7,11 @@ custom_t_test <-
         before_sd = sd(before),
         after_mean = mean(after),
         after_sd = sd(after),
-        diff = before - after,
+        diff = after - before,
         mean_diff = mean(diff),
         sd_diff = sd(diff),
-        t = abs( (mean_diff - 0) /  (sd_diff /  sqrt(nrow(.))) ), 
+        d = mean_diff / sd_diff,
+        t = (mean_diff - 0) /  (sd_diff /  sqrt(nrow(.))), 
         df = n - 1,
         p_t = pt(t, df = df, lower.tail = FALSE)) %>% 
       select(-diff) %>% 
@@ -166,7 +167,7 @@ t_tests_alcohol
 
 t_tests_alcohol %>% 
   select(item, 
-         mean_diff_total, t_total, p_t_total,
-         mean_diff_fire, t_fire, p_t_fire,
-         mean_diff_police, t_police, p_t_police) %>% 
+         d_total, t_total, p_t_total,
+         d_fire, t_fire, p_t_fire,
+         d_police, t_police, p_t_police) %>% 
   write_csv(here::here(paste0('output/t-test-alcohol-', Sys.Date(),'.csv')))

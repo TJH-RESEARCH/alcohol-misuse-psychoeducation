@@ -1,6 +1,6 @@
-# Analysis Code for: Addressing Alcohol Misuse in Public Safety Personnel: Preliminary Evidence from an Alcohol Use and Misuse Training for Police and Fire Personnel
+# Analysis Code for: Psychoeducation for Alcohol Misuse with Police and Firefighters
 
-This repository contains the code to replicate the analysis presented in: "Addressing Alcohol Misuse in Public Safety Personnel: Preliminary Evidence from an Alcohol Use and Misuse Training for Police and Fire Personnel."
+This repository contains the code to replicate the analysis presented in an in-progress manuscript: "Addressing Alcohol Misuse in Public Safety Personnel: Preliminary Evidence from an Alcohol Use and Misuse Training for Police and Fire Personnel."
 
 The code cannot be replicated without the original data, which is not publicly available.
 
