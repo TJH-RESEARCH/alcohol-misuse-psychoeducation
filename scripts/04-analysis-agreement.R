@@ -1,15 +1,22 @@
+## Helper Function: Agree and Strongly Agree as Percentage of Responses
+function_agree <- function(x){
+  ifelse(is.numeric(x), round(sum(x >= 4, na.rm = TRUE) / sum(x >= 0, na.rm = TRUE), 5), 'N/A')
+}
+
 
 # Create Quantitative Analysis Table: Agreed
-
-agreed_sleep <-
+agreed_alcohol <-
   bind_rows(
-    data_sleep %>% 
+    data_alcohol %>% 
       filter(after == 1) %>% 
       group_by(service) %>% 
       select(
-         #know_effects,
-         #know_hygiene,
-         know_post, 
+         #know_signs, 
+         #know_reduction, 
+         #know_effects, 
+         know_post_insights,
+         know_post_resources,
+         know_post_comfort,
          intent_to_use, 
          satisfaction_content,
          satisfaction_usefullness,
@@ -20,13 +27,16 @@ agreed_sleep <-
       filter(!is.na(service)) %>% 
       select(service, everything()),
     
-    data_sleep %>% 
+    data_alcohol %>% 
       filter(after == 1) %>% 
       select(
-         #know_effects,
-         #know_hygiene,
-         know_post, 
-         intent_to_use, 
+         #know_signs, 
+         #know_reduction, 
+         #know_effects, 
+         know_post_insights,
+         know_post_resources,
+         know_post_comfort, 
+         intent_to_use,
          satisfaction_content,
          satisfaction_usefullness,
          satisfaction_clear_purpose,
@@ -38,31 +48,34 @@ agreed_sleep <-
     
     
   ) %>% 
+  arrange(service) %>% # arrange alphabetically by service
     bind_cols(
       bind_rows(
-        data_sleep %>%
-          filter(after == 1) %>% 
+        data_alcohol %>%
+          filter(after == 1 & !is.na(service)) %>% 
           count(service),
-        data_sleep %>% filter(after == 1) %>% filter(!is.na(service)) %>% count() %>% mutate(service = 'total')
+        data_alcohol %>% filter(after == 1) %>% filter(!is.na(service)) %>% count() %>% mutate(service = 'total')
       ) %>% 
-        filter(!is.na(service)) %>% 
+        arrange(service) %>%  # arrange alphabetically by service to match above
         select(n)
     ) %>% 
     select(service, n, everything())
 
-agreed_sleep
+agreed_alcohol
 
 
 
 # Write results to file
-agreed_sleep %>% 
+agreed_alcohol %>% 
   pivot_longer(-service) %>% 
   pivot_wider(id_cols = name,
               names_from = service, 
               values_from = value) %>% 
   mutate(name = c(
     'n',
-    'Post-Training Knowledge',
+    'Improved Knowledge: Insights',
+    'Improved Knowledge: Resources',
+    'Improved Knowledge: Comfort',
     'Intent to Use the Information',
     'Satisfaction: Content',
     'Satisfaction: Usefulness',
@@ -75,6 +88,6 @@ agreed_sleep %>%
          Fire = fire, 
          Police = police) %>% 
   mutate(across(where(is.numeric), ~ round(.x, digits = 2))) %>%
-  write_csv(here::here('output/agreed_sleep.csv'))
+  write_csv(here::here(paste0('output/agreed-alcohol-', Sys.Date(), '.csv')))
 
 
